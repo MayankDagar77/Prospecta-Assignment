@@ -24,19 +24,17 @@ public class EntryController {
 	@GetMapping("/entries")
 	public ResponseEntity<List<Entry>> getAllEntriesHandler(@RequestParam("title") String title,@RequestParam("desc")String description,@RequestParam("auth") String auth,@RequestParam("https") Boolean https,@RequestParam("cors") String cors,@RequestParam("category") String category) throws EntryException{
 		
+		List<Entry> allEntries = eService.getAllEntries(title, description, auth, https, cors, category);
 		
-		
-		
-		return null;
+		return new ResponseEntity<List<Entry>>(allEntries,HttpStatus.OK);
 	}
 	
 	@GetMapping("/random")
-    public ResponseEntity<List<Entry>> getRandomEntryHandler(@RequestParam("title") String title,@RequestParam("desc")String description,@RequestParam("auth") String auth,@RequestParam("https") Boolean https,@RequestParam("cors") String cors,@RequestParam("category") String category) throws EntryException{
+    public ResponseEntity<Entry> getRandomEntryHandler(@RequestParam("title") String title,@RequestParam("desc")String description,@RequestParam("auth") String auth,@RequestParam("https") Boolean https,@RequestParam("cors") String cors,@RequestParam("category") String category) throws EntryException{
 		
-		
-		return null;
-		
-		
+	   Entry entry = eService.getRandomEntry(title, description, auth, https, cors, category);
+	  
+	   return new ResponseEntity<Entry>(entry,HttpStatus.OK);
 	}
 	
 	@PostMapping("/entries")

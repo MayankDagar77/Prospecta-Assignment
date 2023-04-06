@@ -37,6 +37,18 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<MyErrorDetails>(errorDetails,HttpStatus.NOT_FOUND);
 	}
 	
+	@ExceptionHandler(CategoryException.class)
+	ResponseEntity<MyErrorDetails> packageExceptionHandler(CategoryException pe, WebRequest req){
+		
+		MyErrorDetails errorDetails = new MyErrorDetails();
+		errorDetails.setTimeStamp(LocalDateTime.now());
+		errorDetails.setMessage(pe.getMessage());
+		errorDetails.setDescription(req.getDescription(false));
+		
+		return new ResponseEntity<MyErrorDetails>(errorDetails,HttpStatus.NOT_FOUND);
+	}
+	
+	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	ResponseEntity<MyErrorDetails> travelsExceptionHandler(MethodArgumentNotValidException me, WebRequest req){
 		
